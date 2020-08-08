@@ -72,27 +72,15 @@ export default function SignInSide(props) {
     password: Yup.string().required('Required'),
   });
   // Submit form with username and password
-  const onFormSubmit = async (values, { setErrors }) => {
-    userAction
-      .authenticate(values)
-      .then((response) => {
-        localStorageService.setLoginInfo({
-          accessToken: response.data.data.token,
-          refreshToken: response.data.data.refresh_token,
-          userInfo: JSON.stringify(response.data.data.user),
-        });
-        props.history.push('/');
-      })
-      .catch((error) => {
-        if (error.response.status === 405) {
-          //setLoginError(error.response.data.error);
-        } else if (error.response.status === 422 && error.response.data && error.response.data.errors) {
-          let outputErrors = {};
-          const errorlist = error.response.data.errors;          
-          setErrors(errorlist);
-        }
-      });
-  }
+   // Submit form with username and password
+   const onFormSubmit = async (values, { setErrors }) => {
+    localStorageService.setLoginInfo({
+      accessToken: 'safhakjsdhfjasdfhjalsdljfasf',
+      refreshToken: 'sdafkjasdhfsajdhfjasd',
+      userInfo: JSON.stringify(values.username),
+    });
+props.history.push('/');
+}
 
   return (
     <Grid container component="main" className={classes.root}>

@@ -37,8 +37,8 @@ export const routes = [
     icon: <HomeIcon />,
   },
   {
-    label: 'Pages',
-    path: '/pages',
+    label: 'Books',
+    path: '/books',
     page: DynamicPages,
     layoutType: MainLayout,
     requireAuth: true,

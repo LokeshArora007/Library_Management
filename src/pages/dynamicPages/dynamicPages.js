@@ -13,6 +13,7 @@ import {
   EnhancedTable
 } from '../../components';
 import Books from '../books/books.json';
+import CartContainer from './CartContainer';
 
 const useStyles = makeStyles((theme) => ({
   
@@ -22,6 +23,7 @@ const DynamicPages = (props) => {
   const classes = useStyles();
   const [tableData, setTableData] = React.useState([]);
   const [skipPageReset, setSkipPageReset] = React.useState(false);
+  const [selectedBooks, setSelectedBooks] = React.useState([]);
 
   // Table column define
   const columns = [
@@ -45,6 +47,10 @@ const DynamicPages = (props) => {
       Header: 'No. of pages',
       accessor: 'pages'
     }, 
+    {
+      Header: 'Add to cart',
+      accessor: 'isbn'
+    }, 
   ];
 
   React.useEffect(() => {
@@ -53,6 +59,7 @@ const DynamicPages = (props) => {
   
   return (
     <>
+    <div id="portal-root"></div>
       <Grid container>
         <Grid item xs={12} md={12} lg={12}>
           <EnhancedTable
@@ -68,10 +75,11 @@ const DynamicPages = (props) => {
                 const noOfSelection = Object.keys(selected).length;
                 const selecterRows = [];
                 Object.keys(selected) &&
-                  Object.keys(selected).length > 0 &&
-                  Object.keys(selected).map((selectedKey) => {
-                    selecterRows.push(tableData[selectedKey]);
-                  });
+                Object.keys(selected).length > 0 &&
+                Object.keys(selected).map((selectedKey) => {
+                  selecterRows.push(tableData[selectedKey]);
+                  // setSelectedBooks();
+                });
                 return (
                   <div style={{ display: 'flex' }}>
                     <Tooltip title="Add Policy">
@@ -97,6 +105,7 @@ const DynamicPages = (props) => {
                         <DeleteForeverIcon />
                       </IconButton>
                     </Tooltip>
+                    <CartContainer data={selecterRows}/>
                   </div>
                 );
               },

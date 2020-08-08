@@ -72,6 +72,7 @@ export default function SignInSide(props) {
     password: Yup.string().required('Required'),
   });
   // Submit form with username and password
+<<<<<<< HEAD
   const onFormSubmit = async (values, { setErrors }) => {
         localStorageService.setLoginInfo({
           accessToken: 'safhakjsdhfjasdfhjalsdljfasf',
@@ -80,6 +81,17 @@ export default function SignInSide(props) {
         });
     props.history.push('/');
   }
+=======
+   // Submit form with username and password
+   const onFormSubmit = async (values, { setErrors }) => {
+    localStorageService.setLoginInfo({
+      accessToken: 'safhakjsdhfjasdfhjalsdljfasf',
+      refreshToken: 'sdafkjasdhfsajdhfjasd',
+      userInfo: JSON.stringify(values.username),
+    });
+props.history.push('/');
+}
+>>>>>>> 40fe04eb08ec61a445a98053d4c29ceac34b5fe2
 
   return (
     <Grid container component="main" className={classes.root}>

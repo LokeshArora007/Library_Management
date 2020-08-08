@@ -9,7 +9,8 @@ import {
   ChangePasswordPage,
   HomePage,
   DynamicPages,
-  DynamicPageAdd
+  DynamicPageAdd,
+  UsersPage,
 } from '../pages';
 
 export const routes = [
@@ -40,6 +41,16 @@ export const routes = [
     label: 'Books',
     path: '/books',
     page: DynamicPages,
+    layoutType: MainLayout,
+    requireAuth: true,
+    asMenu: true,
+    icon: <PagesIcon />,
+  },
+  
+  {
+    label: 'Users',
+    path: '/users',
+    page: UsersPage,
     layoutType: MainLayout,
     requireAuth: true,
     asMenu: true,

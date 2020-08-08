@@ -1,32 +1,51 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
-import { createStore, StoreProvider } from 'easy-peasy';
-import model from '../../state/model';
+import { render, screen, getByRole, getAllByTitle, queryByAttribute, queryAllByAttribute } from '@testing-library/react';
 import SignInSide from './login';
 
-describe('Login Page', () => {
-  let shallow;
-  let wrapper;
-
-  beforeAll(() => {
-    shallow = createShallow({ dive: true, untilSelector: 'button' });
-  });
-
-  beforeEach(() => {
-    const store = createStore(model);
-    const app = (
-      <StoreProvider store={store}>
-        <SignInSide.WrappedComponent />
-      </StoreProvider>
-    );
-    wrapper = shallow(app);
-  });
-
-  it('should render page', () => {
-    expect(wrapper.length).toBe(1);
-  });
-
-  it('should render user textfield', () => {
-    console.log(wrapper);
-  });
+test('Check if the fields are present on the Login page', () => {
+  const { container, getByText } = render(<SignInSide />);
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
+  expect(username).toBeInTheDocument();
+  expect(password).toBeInTheDocument();
 });
+
+
+test('Check if Username validation is working', () => {
+    const { container, getByText } = render(<SignInSide />);
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    
+    //Empty check for username
+    username.focus();
+    username.blur();
+    expect(username
+        .closest('.MuiInputBase-root')
+        .classList
+        .contains('Mui-error')).toBeInTheDocument();
+
+    //Empty check for password
+    password.focus();
+    password.blur();
+    expect(password
+        .closest('.MuiInputBase-root')
+        .classList
+        .contains('Mui-error')).toBeInTheDocument();
+  });
+
+
+  test('Check if form submission fine', () => {
+    const { container, getByText } = render(<SignInSide />);
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const submitButton = document.getElementsByTagName('button');
+
+    submitButton.onclick = () => {
+        if(oldPassword.value == '' || password.value == ''){
+            expect(username).toBeInTheDocument();
+            expect(password).toBeInTheDocument();
+        }
+    }
+
+    submitButton.click();
+  });

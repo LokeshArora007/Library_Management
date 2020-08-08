@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide(props) {
   const classes = useStyles();
-  const userAction = useStoreActions((actions) => actions.login);
+ // const userAction = useStoreActions((actions) => actions.login);
 
   // Set initial empty values for email and password
   const data = {

@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
   DynamicPageFormFields
 } from '../../components';
-import books from '../users/books.json';
+import books from './books.json';
 
 /** STYLES HERE * */
 const useStyles = makeStyles(() => ({

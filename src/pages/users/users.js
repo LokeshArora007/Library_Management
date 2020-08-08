@@ -12,7 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import {
   EnhancedTable
 } from '../../components';
-import Books from './books.json';
+import Books from '../books/books.json';
 import Users from './users.json';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,15 +39,21 @@ const UsersPages = (props) => {
       accessor: 'email'
     }, 
     {
-      Header: 'Books taken',
+      Header: 'Books Taken',
       accessor: 'books'
     }, 
+    {
+      Header: 'Books Taken on',
+      accessor: 'published'
+    }, 
   ];
-console.log(Books)
+  
   React.useEffect(() => {
     setTableData(Users.map((user, i)=>{
       if(Books[i]){
-        return Object.assign({}, user, {'books':[Books[i].title]});
+        return Object.assign({}, user, {
+          'books':[Books[i].title], 
+          'published':[Books[i].published]});
       }
       return user;
     }));
@@ -60,11 +66,11 @@ console.log(Books)
           <EnhancedTable
             columns={columns}
             data={tableData ? tableData : []}
-            rowSelection={false}
+            rowSelection={true}
             skipPageReset={skipPageReset}
             toolbar={{
               show: true,
-              title: 'Pages',
+              title: 'Members',
               enableSearch: true,
               actionButtonGroup: (selected) => {
                 const noOfSelection = Object.keys(selected).length;
